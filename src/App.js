@@ -1,24 +1,33 @@
-import logo from './logo.svg';
+import {useState} from 'react';
+
+import Select from 'components/select/Select';
+
 import './App.css';
 
 function App() {
+  const [select,setSelect]=useState("");
+  const [selectIsOpen,setSelectIsOpen]=useState(false);
+
+  const selectToggleHandler=()=>{
+    setSelectIsOpen(!selectIsOpen);
+  };
+
+  const clickHandler=(program)=>{
+    setSelectIsOpen(false);
+    if(!program){
+      setSelect("");
+    }
+    else{
+      setSelect(program.programName);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className="section-padding bg-height">
+      <div className="container container-padding">
+        <Select selectIsOpen={selectIsOpen} select={select} selectToggleHandler={selectToggleHandler} clickHandler={clickHandler} />
+      </div>
+    </section>
   );
 }
 
